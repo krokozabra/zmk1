@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2020 ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "charybdis.dtsi"
+
+&kscan0 {
+	row-gpios =
+			<&gpio1 13 GPIO_ACTIVE_LOW>,
+			<&gpio1 11 GPIO_ACTIVE_LOW>,
+			<&gpio0 10 GPIO_ACTIVE_LOW>,
+			<&gpio0 9 GPIO_ACTIVE_LOW>;
+
+	col-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>,
+				<&gpio0 22 GPIO_ACTIVE_LOW>,
+				<&gpio0 24 GPIO_ACTIVE_LOW>,
+				<&gpio1 0 GPIO_ACTIVE_LOW>,
+				<&gpio0 11 GPIO_ACTIVE_LOW>,
+				<&gpio1 4 GPIO_ACTIVE_LOW>,
+				<&gpio1 6 GPIO_ACTIVE_LOW>;
+
+};
