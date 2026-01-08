@@ -1,16 +1,14 @@
-if SHIELD_IRIS_RIGHT
-
+# Определите, какая половина будет центральной (обычно ЛЕВАЯ)
+if SHIELD_IRIS_LEFT
 config ZMK_KEYBOARD_NAME
-	default "Igris"
+    default "Igris"
 
-config ZMK_SPLIT_BLE_ROLE_CENTRAL
-	default y
-
+config ZMK_SPLIT_BLE_ROLE_CENTRAL  # ЛЕВАЯ половина - центральная
+    default y
 endif
 
+# Общие настройки для обеих половинок
 if SHIELD_IRIS_LEFT || SHIELD_IRIS_RIGHT
-
 config ZMK_SPLIT
-	default y
-	
+    default y
 endif
