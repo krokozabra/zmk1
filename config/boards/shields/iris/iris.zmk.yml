@@ -1,6 +1,6 @@
 file_format: "1"
-id: charybdis
-name: Charybdis
+id: iris
+name: Iris
 type: shield
 url: https://github.com/Bastardkb/Charybdis/
 requires: [nice_nano_v2]
@@ -8,5 +8,5 @@ features:
   - keys
   - pointer
 siblings:
-  - charybdis_left
-  - charybdis_right
+  - iris_left
+  - iris_right
