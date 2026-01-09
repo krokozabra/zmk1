@@ -17,9 +17,34 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
+#---
+#include:
+#  - board: nice_nano_v2
+#    shield: iris_left
+#  - board: nice_nano_v2
+#    shield: iris_right
 ---
-include:
-  - board: nice_nano_v2
-    shield: iris_left
-  - board: nice_nano_v2
-    shield: iris_right
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - board: nice_nano_v2
+            shield: iris_left
+          - board: nice_nano_v2
+            shield: iris_right
+
+    steps:
+      # ... существующие шаги сборки ...
+
+      - name: Create Clear Flash File
+        run: |
+          python3 scripts/clear_flash.py
+          ls -la clear_flash.uf2
+
+      - name: Upload Clear Flash Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: clear-flash-utility
+          path: clear_flash.uf2
