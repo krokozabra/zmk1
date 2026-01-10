@@ -1,6 +1,6 @@
 file_format: "1"
-id: iris
-name: Iris
+id: iris22
+name: Iris22
 type: shield
 url: https://github.com/Bastardkb/Charybdis/
 requires: [nice_nano_v2]

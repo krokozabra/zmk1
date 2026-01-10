@@ -1,73 +1,27 @@
-name: Build ZMK Firmware
-
-on: [push, pull_request]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    # Используем matrix для двух сборок
-    strategy:
-      matrix:
-        include:
-          - board: nice_nano_v2
-            shield: iris_left
-            artifact-name: iris_left-nice_nano_v2-zmk
-          - board: nice_nano_v2
-            shield: iris_right
-            artifact-name: iris_right-nice_nano_v2-zmk
-
-    steps:
-      - uses: actions/checkout@v3
-
-      # Создание файла очистки flash
-      - name: Create Clear Flash Utility
-        run: |
-          python3 << 'EOF'
-          import struct
-          UF2_MAGIC_START = 0x0A324655
-          UF2_MAGIC_END = 0x0AB16F30
-          UF2_FLAG_FAMILY_ID = 0x00002000
-          UF2_FAMILY_ID_NRF52840 = 0xADA52840
-          
-          def create_uf2_block(addr, data):
-              block = bytearray(512)
-              block[0:4] = UF2_MAGIC_START.to_bytes(4, 'little')
-              block[4:8] = UF2_MAGIC_END.to_bytes(4, 'little')
-              block[8:12] = UF2_FLAG_FAMILY_ID.to_bytes(4, 'little')
-              block[12:16] = addr.to_bytes(4, 'little')
-              block[16:20] = len(data).to_bytes(4, 'little')
-              block[20:24] = (0).to_bytes(4, 'little')
-              block[24:28] = (1).to_bytes(4, 'little')
-              block[28:32] = UF2_FAMILY_ID_NRF52840.to_bytes(4, 'little')
-              block[32:32+len(data)] = data
-              return block
-          
-          with open('clear_flash.uf2', 'wb') as f:
-              block = create_uf2_block(0x00000000, bytes([0xFF]*476))
-              f.write(block)
-          print("Created clear_flash.uf2")
-          EOF
-          ls -la clear_flash.uf2
-
-      # Основная сборка ZMK
-      - name: Build
-        uses: zmkfirmware/zmk-build-action@v0.4.1
-        with:
-          board: ${{ matrix.board }}
-          shield: ${{ matrix.shield }}
-
-      # Загрузка артефактов: прошивки
-      - name: Upload Firmware Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.artifact-name }}
-          path: firmware/*.uf2
-
-      # Загрузка файла очистки (только один раз)
-      - name: Upload Clear Flash Artifact
-        if: matrix.shield == 'iris_left'  # Загружаем только один раз
-        uses: actions/upload-artifact@v3
-        with:
-          name: clear-flash-utility
-          path: clear_flash.uf2
+# This file generates the GitHub Actions matrix.
+# For simple board + shield combinations, add them to the top level board and
+# shield arrays, for more control, add individual board + shield combinations
+# to the `include` property. You can also use the `cmake-args` property to
+# pass flags to the build command, `snippet` to add a Zephyr snippet, and
+# `artifact-name` to assign a name to distinguish build outputs from each other:
+#
+# board: [ "nice_nano" ]
+# shield: [ "corne_left", "corne_right" ]
+# include:
+#   - board: bdn9_rev2
+#   - board: nice_nano
+#     shield: reviung41
+#   - board: nice_nano
+#     shield: corne_left
+#     snippet: studio-rpc-usb-uart
+#     cmake-args: -DCONFIG_ZMK_STUDIO=y
+#     artifact-name: corne_left_with_studio
+#
+---
+include:
+  - board: nice_nano_v2
+    shield: iris_left
+  - board: nice_nano_v2
+    shield: iris_right
+  - board: nice_nano_v2
+    shield: settings_reset
