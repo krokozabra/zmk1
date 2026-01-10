@@ -17,6 +17,5 @@ if SHIELD_IRIS_LEFT || SHIELD_IRIS_RIGHT
 config ZMK_SPLIT
     default y
 # Имя по умолчанию (переопределяется выше)
-config ZMK_KEYBOARD_NAME
-    default "Igris"
+
 endif
