@@ -20,8 +20,8 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: iris_left
+    shield: iris_left_central
   - board: nice_nano_v2
-    shield: iris_right
+    shield: iris_right_peripheral
   - board: nice_nano_v2
     shield: settings_reset

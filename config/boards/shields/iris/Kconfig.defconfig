@@ -1,5 +1,5 @@
 # Левая половина - центральная
-if SHIELD_IRIS_LEFT
+if SHIELD_IRIS_LEFT_CENTRAL
 config ZMK_SPLIT_BLE_ROLE_CENTRAL
     default y
 config ZMK_KEYBOARD_NAME
