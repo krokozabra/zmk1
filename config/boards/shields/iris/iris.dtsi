@@ -1,7 +1,10 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-
+	chosen {
+		zmk,kscan = &kscan0;
+		zmk,matrix_transform = &left_transform;
+	};
 
     vbatt: vbatt {
 	compatible = "zmk,battery-nrf-vddh";
