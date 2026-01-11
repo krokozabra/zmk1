@@ -6,7 +6,6 @@ url: https://github.com/Bastardkb/Charybdis/
 requires: [nice_nano_v2]
 features:
   - keys
-  - pointer
 siblings:
   - iris_left
   - iris_right

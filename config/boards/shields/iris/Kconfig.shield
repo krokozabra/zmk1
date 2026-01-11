@@ -1,5 +1,5 @@
-config SHIELD_IRIS_LEFT
-	def_bool $(shields_list_contains,iris_left)
+config SHIELD_IRIS_LEFT_CENTRAL
+	def_bool $(shields_list_contains,iris_left_central)
 
-config SHIELD_IRIS_RIGHT
-	def_bool $(shields_list_contains,iris_right)
+config SHIELD_IRIS_RIGHT_PERIPHERAL
+	def_bool $(shields_list_contains,iris_right_peripheral)

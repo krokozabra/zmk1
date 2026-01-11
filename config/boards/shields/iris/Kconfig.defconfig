@@ -7,7 +7,7 @@ config ZMK_KEYBOARD_NAME
 endif
 
 # Правая половина - периферийная
-if SHIELD_IRIS_RIGHT
+if SHIELD_IRIS_RIGHT_PERIPHERAL
 config ZMK_KEYBOARD_NAME
     default "Igris_RIGHT_PERIPHERAL"  # Отладочное имя
 endif
